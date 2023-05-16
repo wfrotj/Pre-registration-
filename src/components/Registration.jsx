@@ -1,6 +1,7 @@
 import React, { createContext } from "react";
 import { useState } from "react";
 import "../styles/Registration.css";
+import TitleCase from "./utils/TitleCase";
 
 function Registration() {
   const [students, setStudents] = useState([]);
@@ -23,11 +24,11 @@ function Registration() {
 
     const fname = document.createElement("h1");
     fname.classList.add("fname");
-    fname.textContent = `First Name: ${titleCase(firstNameValue)}`;
+    fname.textContent = `First Name: ${{ TitleCase }(firstNameValue)}`;
 
     const lname = document.createElement("h1");
     lname.classList.add("lname");
-    lname.textContent = `Last Name: ${titleCase(lastNameValue)}`;
+    lname.textContent = `Last Name: ${{ TitleCase }(lastNameValue)}`;
 
     const h2 = document.createElement("h2");
     h2.textContent = `Age: ${age}`;
@@ -74,8 +75,8 @@ function Registration() {
       setStudents([
         ...students,
         {
-          firstName: titleCase(firstNameValue),
-          lastName: titleCase(lastNameValue),
+          firstName: { TitleCase }(firstNameValue),
+          lastName: { TitleCase }(lastNameValue),
           age: age,
         },
       ]);
@@ -147,17 +148,6 @@ function Registration() {
     }
   };
 
-  function titleCase(str) {
-    str = str.toLowerCase();
-    str = str.split(" ");
-
-    for (var i = 0; i < str.length; i++) {
-      str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
-    }
-
-    return str.join(" ");
-  }
-
   return (
     <div className="main">
       <div className="hero">
@@ -175,6 +165,7 @@ function Registration() {
               className="fname"
               id="firstNameInput"
             />
+
             <label>Last Name</label>
             <input
               type="text"
@@ -183,25 +174,22 @@ function Registration() {
               className="lname"
               id="lasttNameInput"
             />
-            <label>Age</label>
-            <input
-              type="number"
-              className="age"
-              value={age}
-              onChange={handleAge}
-              id="ageInput"
-            />
-            <label>Address</label>
-            <input
-              type="number"
-              className="age"
-              value={age}
-              onChange={handleAge}
-              id="ageInput"
-            />
-            <button type="submit" className="add-btn">
-              {editingIndex !== null ? "Save" : "Add"}
-            </button>
+            <div>
+              <label>Age</label>
+              <input
+                type="number"
+                className="age"
+                value={age}
+                onChange={handleAge}
+                id="ageInput"
+              />
+            </div>
+
+            <div>
+              <button type="submit" className="add-btn">
+                {editingIndex !== null ? "Save" : "Add"}
+              </button>
+            </div>
           </form>
         </div>
       </div>
@@ -213,7 +201,7 @@ function Registration() {
               <th>First name</th>
               <th>Last name</th>
               <th>Age</th>
-              <th>Address</th>
+
               <th>Action</th>
             </tr>
           </thead>
